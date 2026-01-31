@@ -22,6 +22,7 @@
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes floatUp { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-80px); } }
+    select { padding:0.5rem 0.8rem; border-radius:12px; border:1px solid #ddd; width:80%; margin-bottom:1rem; }
   </style>
 </head>
 <body>
@@ -29,119 +30,151 @@
   <!-- PAGE 1: ASK TO GO ON A DATE -->
   <div class="card" id="askDateCard">
     <div class="heart">🤍</div>
-    <h1>Ms. Fornilos</h1>
-    <p>Before anything else… I just want to ask you something simple.</p>
-    <p>Would you like to go on a date with me? ☕🌙</p>
+    <h1>Ms. Aleyah Fornilos</h1>
+    <p>Before anything else I just want to ask you something.</p>
+    <p>Would you like to go on a date with me? </p>
     <div class="buttons">
-      <button class="yes" onclick="goToPickDate()">Yes 💕</button>
-      <button class="no" id="noBtn" onmouseover="moveNo()">No 🙈</button>
+      <button class="yes" onclick="goToPickDate()">Yes </button>
+      <button class="no" id="noBtn" onmouseover="moveNo()">No </button>
     </div>
   </div>
 
   <!-- PAGE 2: PICK DATE -->
   <div class="card hidden" id="pickDateCard">
     <div class="heart">📅</div>
-    <h1>Pick a date</h1>
-    <p>Choose a day that feels right 🤍</p>
-    <input type="date" id="datePicker" style="padding:0.5rem 0.8rem; border-radius:12px; border:1px solid #ddd; margin-bottom:1rem;" />
+    <h1>Choose a date</h1>
+    <p>Pick a day that works for you</p>
+    <select id="datePicker">
+      <option value="">Select a date</option>
+      <option>Febraury 1</option>
+    </select>
     <div class="buttons">
-      <button class="yes" onclick="goToPickTime()">Next 💖</button>
-      <button class="no" id="noBtn2" onmouseover="moveNo2()">No 🙈</button>
+      <button class="yes" onclick="goToPickTime()">Next </button>
+      <button class="no" id="noBtn2" onmouseover="moveNo2()">No </button>
     </div>
   </div>
 
-  <!-- PAGE 3: PICK TIME -->
+  <!-- PAGE 3: PICK TIME OF DAY -->
   <div class="card hidden" id="pickTimeCard">
     <div class="heart">🕒</div>
     <h1>Choose a time</h1>
-    <p>What time works for you?</p>
-    <select id="timePicker" style="padding:0.5rem 0.8rem; border-radius:12px; border:1px solid #ddd; margin-bottom:1rem; width:80%;">
+    <p>What time of day works for you?</p>
+    <select id="timeOfDayPicker">
       <option value="">Select time</option>
-      <option>Morning ☀️</option>
-      <option>Afternoon 🌤️</option>
-      <option>Evening 🌆</option>
-      <option>Night 🌙</option>
+      <option>Morning</option>
+      <option>Afternoon</option>
+      <option>Evening</option>
+
     </select>
     <div class="buttons">
-      <button class="yes" onclick="goToGirlfriend()">Next 💖</button>
-      <button class="no" id="noBtn3" onmouseover="moveNo3()">No 🙈</button>
+      <button class="yes" onclick="goToPickHours()">Next</button>
+      <button class="no" id="noBtn3" onmouseover="moveNo3()">No</button>
     </div>
   </div>
 
-  <!-- PAGE 4: ASK TO BE MY GIRLFRIEND -->
-  <div class="card hidden" id="gfCard">
-    <div class="heart">💖</div>
-    <h1>One more question…</h1>
-    <p>Spending time with you already feels right. I don’t want to rush things—but I do want to be clear with my intentions.</p>
-    <p>Would you be my girlfriend? 🤍</p>
+  <!-- PAGE 4: PICK HOURS -->
+  <div class="card hidden" id="pickHoursCard">
+    <div class="heart">⏰</div>
+    <h1>Choose duration</h1>
+    <p>how long would you like to meet?</p>
+    <select id="hoursPicker">
+      <option value="">Select hours</option>
+      <option>1 hour</option>
+      <option>2 hours</option>
+      <option>3 hours</option>
+      <option>4 hours</option>
+      <option>More hours</option>
+    </select>
     <div class="buttons">
-      <button class="yes" onclick="sayYes()">Yes 💖</button>
-      <button class="no" id="noBtn4" onmouseover="moveNo4()">No 🙈</button>
+      <button class="yes" onclick="goToPickType()">Next</button>
+      <button class="no" id="noBtn4" onmouseover="moveNo4()">No</button>
     </div>
   </div>
 
-  <!-- YES RESULT -->
-  <div class="card hidden" id="yesCard">
+  <!-- PAGE 5: PICK TYPE OF DATE -->
+  <div class="card hidden" id="pickTypeCard">
+    <div class="heart">🎉</div>
+    <h1>Choose your date type</h1>
+    <p>Any idea what you’d like to do</p>
+    <select id="typePicker">
+      <option value="">Select type</option>
+      <option>Cine</option>
+      <option>Sunset</option>
+      <option>Nature</option>
+      <option>Eat</option>
+      <option>Coffee</option>
+      <option>Church</option>
+    </select>
+    <div class="buttons">
+      <button class="yes" onclick="showSummary()">Next</button>
+      <button class="no" id="noBtn5" onmouseover="moveNo5()">No</button>
+    </div>
+  </div>
+
+  <!-- PAGE 6: INVITATION SUMMARY -->
+  <div class="card hidden" id="summaryCard">
     <div class="heart">💞</div>
-    <h1>Ms. Fornilos said yes!</h1>
-    <p>Thank you for choosing me. I promise to take care of you, make you laugh, and choose you every single day.</p>
+    <h1>Invitation </h1>
+    <p id="summaryText"></p>
     <p><strong>Screenshot this and send it to me 😉</strong></p>
   </div>
 
   <script>
+    let chosenDate = '';
+    let chosenTime = '';
+    let chosenType = '';
+
     const noBtn = document.getElementById('noBtn');
     const noBtn2 = document.getElementById('noBtn2');
     const noBtn3 = document.getElementById('noBtn3');
     const noBtn4 = document.getElementById('noBtn4');
+    const noBtn5 = document.getElementById('noBtn5');
 
-    function goToPickDate() {
+    function goToPickDate(){
       document.getElementById('askDateCard').classList.add('hidden');
       document.getElementById('pickDateCard').classList.remove('hidden');
     }
 
-    function goToPickTime() {
-      const date = document.getElementById('datePicker').value;
-      if (!date) { alert('Please pick a date first 🤍'); return; }
+    function goToPickTime(){
+      chosenDate = document.getElementById('datePicker').value;
+      if(!chosenDate){ alert('Please select a date 🤍'); return; }
       document.getElementById('pickDateCard').classList.add('hidden');
       document.getElementById('pickTimeCard').classList.remove('hidden');
     }
 
-    function goToGirlfriend() {
-      const time = document.getElementById('timePicker').value;
-      if (!time) { alert('Please pick a time 🤍'); return; }
+    function goToPickHours(){
+      chosenTime = document.getElementById('timeOfDayPicker').value;
+      if(!chosenTime){ alert('Please select a time of day 🤍'); return; }
       document.getElementById('pickTimeCard').classList.add('hidden');
-      document.getElementById('gfCard').classList.remove('hidden');
+      document.getElementById('pickHoursCard').classList.remove('hidden');
     }
 
-    function sayYes() {
-      document.getElementById('gfCard').classList.add('hidden');
-      document.getElementById('yesCard').classList.remove('hidden');
+    function goToPickType(){
+      const hours = document.getElementById('hoursPicker').value;
+      if(!hours){ alert('Please select number of hours 🤍'); return; }
+      chosenTime += ` for ${hours}`;
+      document.getElementById('pickHoursCard').classList.add('hidden');
+      document.getElementById('pickTypeCard').classList.remove('hidden');
+    }
+
+    function showSummary(){
+      chosenType = document.getElementById('typePicker').value;
+      if(!chosenType){ alert('Please select a date type 🤍'); return; }
+      document.getElementById('pickTypeCard').classList.add('hidden');
+      document.getElementById('summaryCard').classList.remove('hidden');
+      document.getElementById('summaryText').innerText = `Your date is on ${chosenDate}, at ${chosenTime}, doing: ${chosenType}`;
       playMusic();
       createSparkles();
     }
 
-    function moveNo() { const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn.style.transform=`translate(${x}px, ${y}px)`; }
-    function moveNo2() { const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn2.style.transform=`translate(${x}px, ${y}px)`; }
-    function moveNo3() { const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn3.style.transform=`translate(${x}px, ${y}px)`; }
-    function moveNo4() { const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn4.style.transform=`translate(${x}px, ${y}px)`; }
+    function moveNo(){ const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn.style.transform=`translate(${x}px,${y}px)`; }
+    function moveNo2(){ const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn2.style.transform=`translate(${x}px,${y}px)`; }
+    function moveNo3(){ const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn3.style.transform=`translate(${x}px,${y}px)`; }
+    function moveNo4(){ const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn4.style.transform=`translate(${x}px,${y}px)`; }
+    function moveNo5(){ const x=Math.random()*200-100; const y=Math.random()*100-50; noBtn5.style.transform=`translate(${x}px,${y}px)`; }
 
-    function playMusic() {
-      const audio = new Audio('https://www.bensound.com/bensound-music/bensound-love.mp3');
-      audio.volume = 0.4;
-      audio.play();
-    }
-
-    function createSparkles() {
-      for (let i=0;i<15;i++){
-        const s=document.createElement('div');
-        s.className='sparkle';
-        s.innerText='✨';
-        s.style.left=Math.random()*window.innerWidth+'px';
-        s.style.top=Math.random()*window.innerHeight+'px';
-        document.body.appendChild(s);
-        setTimeout(()=>s.remove(),2000);
-      }
-    }
+    function playMusic(){ const audio = new Audio('https://www.bensound.com/bensound-music/bensound-love.mp3'); audio.volume = 0.4; audio.play(); }
+    function createSparkles(){ for(let i=0;i<15;i++){ const s=document.createElement('div'); s.className='sparkle'; s.innerText='✨'; s.style.left=Math.random()*window.innerWidth+'px'; s.style.top=Math.random()*window.innerHeight+'px'; document.body.appendChild(s); setTimeout(()=>s.remove(),2000); }}
   </script>
 </body>
 </html>
